@@ -18,4 +18,4 @@ st.success('Current date %s: ' % str(today_date))
 st.header("Dataset")
 agree = sidebar.checkbox("show DataSet ? ")
 if agree:
-    st.dataframea(titanic_data)
+    st.dataframe(titanic_data)
