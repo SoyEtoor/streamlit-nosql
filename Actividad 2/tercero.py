@@ -11,6 +11,10 @@ st.title("My First Streamlit App")
 sidebar = st.sidebar
 sidebar.title("This is the Sidebar")
 sidebar.write("You can add any elements to the sidebar")
+sidebar.title('Alumno')
+sidebar.write('Héctor Miguel Torres Martínez')
+sidebar.write('zs22004346')
+sidebar.image("yogris.jpeg")
 
 # Give user the current date
 

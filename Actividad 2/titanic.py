@@ -19,3 +19,10 @@ st.header("Dataset")
 agree = sidebar.checkbox("show DataSet ? ")
 if agree:
     st.dataframe(titanic_data)
+    
+
+
+sidebar.title('Alumno')
+sidebar.write('Héctor Miguel Torres Martínez')
+sidebar.write('zs22004346')
+sidebar.image("yogris.jpeg")

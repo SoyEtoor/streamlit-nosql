@@ -6,6 +6,10 @@ st.title("Mi Primera App con Streamlit")
 
 # Creamos el sidebar
 sidebar = st.sidebar
+sidebar.title('Alumno')
+sidebar.write('Héctor Miguel Torres Martínez')
+sidebar.write('zs22004346')
+sidebar.image("yogris.jpeg")
 
 # Agregamos un título y texto al sidebar
 sidebar.title("Esta es la barra lateral.")

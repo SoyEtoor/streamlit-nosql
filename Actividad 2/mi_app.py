@@ -5,6 +5,12 @@ import streamlit as st
 titanic_link = 'titanic.csv'
 titanic_data = pd.read_csv(titanic_link)
 
+sidebar = st.sidebar
+sidebar.title('Alumno')
+sidebar.write('Héctor Miguel Torres Martínez')
+sidebar.write('zs22004346')
+sidebar.image("yogris.jpeg")
+
 fig, ax = plt.subplots()
 ax.hist(titanic_data.fare)
 st.header("Historgrama del Titanic")

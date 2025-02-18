@@ -6,8 +6,11 @@ titanic_link = 'titanic.csv'
 titanic_data = pd.read_csv(titanic_link)
 
 #Tittle and sidebar
-st.title('Titanic Data')
 sidebar = st.sidebar
+sidebar.title('Titanic Data')
+sidebar.write('Héctor Miguel Torres Martínez')
+sidebar.write('zs22004346')
+sidebar.image("yogris.jpeg")
 
 #Checkbox to show the dataset overview
 agree = sidebar.checkbox('Show dataset Overview')
