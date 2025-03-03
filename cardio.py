@@ -6,24 +6,9 @@ import seaborn as sns
 # Configuración de la página
 st.set_page_config(page_title="Cardiovascular Disease Dataset", layout="wide")
 
-# Logo del proyecto y autor
+# Logo del proyecto y título
 st.image("cardio.png", width=100)
 st.title("Cardiovascular Disease Dataset")
-st.write("Autor: Héctor Miguel Torres Martínez")
-st.write("Matrícula: zs22004346")
-
-# cached_data
-DATA_URL = "cardio_train.csv"
-LENGTH_DATA = sum(1 for _ in open(DATA_URL)) - 1 
-
-@st.cache_data
-def load_data(nrows):
-    return pd.read_csv(DATA_URL, nrows=nrows)
-
-st.title("Cache")
-
-nrows = st.number_input("Número de filas a cargar", 1, LENGTH_DATA)
-df = load_data(nrows)
 
 # Descripción de las columnas
 st.subheader("Descripción de los datos")
@@ -44,7 +29,20 @@ description = {
 
 st.write(pd.DataFrame(list(description.items()), columns=["Columna", "Descripción"]))
 
-# Visualización de los datos
+# Cargar datos
+DATA_URL = "cardio_train.csv"
+LENGTH_DATA = sum(1 for _ in open(DATA_URL)) - 1 
+
+@st.cache_data
+def load_data(nrows):
+    return pd.read_csv(DATA_URL, nrows=nrows)
+
+st.title("Cache")
+
+nrows = st.number_input("Número de filas a cargar", 1, LENGTH_DATA)
+df = load_data(nrows)
+
+# Mostrar datos completos
 st.dataframe(df)
 
 # Buscador de información en el dataset
@@ -56,6 +54,7 @@ if st.sidebar.button("Buscar"):
 
 # Filtrado de información
 st.sidebar.header("Filtros")
+category_options = st.sidebar.selectbox("Selecciona una categoría (opcional):", ["Mostrar todas"] + list(df.columns))
 gender_options = st.sidebar.multiselect("Selecciona género:", df["gender"].unique())
 cholesterol_options = st.sidebar.multiselect("Selecciona nivel de colesterol:", df["cholesterol"].unique())
 glucose_options = st.sidebar.multiselect("Selecciona nivel de glucosa:", df["gluc"].unique())
@@ -68,8 +67,12 @@ if cholesterol_options:
 if glucose_options:
     filtered_df = filtered_df[filtered_df["gluc"].isin(glucose_options)]
 
+# Mostrar datos según selección
 st.write("Datos filtrados:")
-st.dataframe(filtered_df.head(10))
+if category_options == "Mostrar todas":
+    st.dataframe(filtered_df.head(10))
+else:
+    st.dataframe(filtered_df[[category_options]].head(10))
 
 # Histograma de edades
 st.header("Distribución de edades")
