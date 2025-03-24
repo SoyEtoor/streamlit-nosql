@@ -106,3 +106,20 @@ st.sidebar.title('Alumno')
 st.sidebar.write('Héctor Miguel Torres Martínez')
 st.sidebar.write('zs22004346')
 st.sidebar.image("yogris.jpeg")
+
+# Gráfica Relación entre actividad física y glucosa
+st.header("Relación entre Actividad Física y Niveles de Glucosa")
+
+# Contar cuántas personas hay en cada categoría de glucosa según si hacen ejercicio o no
+activity_gluc_counts = df.groupby(["active", "gluc"]).size().unstack()
+
+# Graficar
+plt.figure(figsize=(8, 5))
+activity_gluc_counts.plot(kind="bar", stacked=True, color=["blue", "orange", "red"])
+plt.xlabel("Actividad Física (0 = Sí, 1 = No)")
+plt.ylabel("Cantidad de personas")
+plt.legend(["Glucosa Normal", "Glucosa Alta", "Glucosa Muy Alta"])
+plt.title("Distribución de Niveles de Glucosa según la Actividad Física")
+st.pyplot(plt)
+
+st.write("Esta gráfica muestra si las personas que no hacen ejercicio tienden a tener niveles de glucosa más altos.")
